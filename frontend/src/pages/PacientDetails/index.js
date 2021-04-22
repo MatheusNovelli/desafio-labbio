@@ -2,22 +2,23 @@ import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 
 export default function PacientDetails(props) {
-  function pacientInfo({ info }) {
+  function PacientInfo({ info, infoRes }) {
     return (
       <div>
         <strong>
           {info}
-          <p>Teste</p>
+          <p>{infoRes}</p>
         </strong>
       </div>
     );
   }
     
-  const [pacient, setPacient] = useState({});
+  const [pacient, setPacient] = useState();
 
   useEffect(() => {
     api.get(`paciente/${props.match.params.id}`).then((response) => {
-      setPacient(response.data);
+        setPacient(response.data);
+        console.log("paciente",pacient)
     });
   });
 
@@ -25,9 +26,7 @@ export default function PacientDetails(props) {
     <div>
       <h3>Detalhes do paciente</h3>
       <div>
-        {pacient && (<pacientInfo info={"Nome"} />)}
-        {pacient && <pacientInfo info="Nome" />}
-        {pacient && <pacientInfo info="Nome" />}
+        {pacient && (<PacientInfo info={"Nome"} infoRes={pacient.nome} />)}
       </div>
     </div>
   );
