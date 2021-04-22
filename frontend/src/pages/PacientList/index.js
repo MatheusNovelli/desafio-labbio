@@ -18,10 +18,15 @@ export default function PacientList() {
         <div className="pacient-list">
           {pacients.map((pacient, index) => (
             <div className="pacient-item">
+              <Link to={{
+                pathname: `pacientdetails/${pacient.id}`,
+                state: pacient
+              }}>
               <span key= {index}>{pacient.nome}</span>
+              </Link>
               <Link to={{
                 pathname: `pacientedit/${pacient.id}`,
-                state: pacients
+                state: pacient
               }
               }>
               <button onClick={console.log("id",pacient.id)}>Editar</button>

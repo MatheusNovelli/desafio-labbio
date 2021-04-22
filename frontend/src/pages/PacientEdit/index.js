@@ -11,7 +11,7 @@ export default function PacientEdit(props) {
 
   return (
     <div>
-      <PacientCreateOrEdit request={api.put} url={`/pacientes/${props.match.params.id}`} notification="Paciente atualizado."/>
+      <PacientCreateOrEdit request={api.put} url={`/pacientes/${props.match.params.id}`} notification="Paciente atualizado." isRequired={false}/>
     </div>
   );
 }

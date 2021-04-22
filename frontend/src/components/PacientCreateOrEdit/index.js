@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Button } from "antd";
 import { FiCheckCircle } from "react-icons/fi";
+import api from "../../services/api";
+import 'antd/dist/antd.css'
 
 const layout = {
   labelCol: {
@@ -11,7 +13,7 @@ const layout = {
   },
 };
 
-export default function PacientCreateOrEdit({ request ,url, notification }) {
+export default function PacientCreateOrEdit({ request, url, notification, isRequired }) {
   const [id, setId] = useState(0);
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
@@ -21,6 +23,20 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
   const [endereco, setEndereco] = useState("");
+
+  useEffect(() => {
+    api.get("pacientes").then((response) => {
+      setId(response.data);
+      setNome(response.data);
+      setCpf(response.data);
+      setSexo(response.data);
+      setIdade(response.data);
+      setPeso(response.data);
+      setTelefone(response.data);
+      setEmail(response.data);
+      setEndereco(response.data);
+    });
+  }, []);
 
   const data = {
     id,
@@ -48,16 +64,6 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
           width: 600,
         },
       });
-
-      setId("");
-      setNome("");
-      setCpf("");
-      setSexo("");
-      setIdade("");
-      setPeso("");
-      setTelefone("");
-      setEmail("");
-      setEndereco("");
     } catch (error) {
       console.error("Erro ao criar paciente");
     }
@@ -76,7 +82,7 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
         value={id}
         rules={[
           {
-            required: true,
+            required: isRequired,
             message: "Insira o ID do paciente!",
           },
         ]}
@@ -89,7 +95,7 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
         value={nome}
         rules={[
           {
-            required: true,
+            required: isRequired,
             message: "Insira o nome do paciente!",
           },
         ]}
@@ -102,7 +108,7 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
         value={cpf}
         rules={[
           {
-            required: true,
+            required: isRequired,
             message: "Insira o CPF do paciente!",
           },
         ]}
@@ -115,7 +121,7 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
         value={sexo}
         rules={[
           {
-            required: true,
+            required: isRequired,
             message: "Insira o sexo do paciente!",
           },
         ]}
@@ -128,7 +134,7 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
         value={idade}
         rules={[
           {
-            required: true,
+            required: isRequired,
             message: "Insira a idade do paciente!",
           },
         ]}
@@ -141,7 +147,7 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
         value={peso}
         rules={[
           {
-            required: true,
+            required: isRequired,
             message: "Insira o peso do paciente!",
           },
         ]}
@@ -154,7 +160,7 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
         value={telefone}
         rules={[
           {
-            required: true,
+            required: isRequired,
             message: "Insira o telefone do paciente!",
           },
         ]}
@@ -167,7 +173,7 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
         value={email}
         rules={[
           {
-            required: true,
+            required: isRequired,
             message: "Insira o e-mail do paciente!",
           },
         ]}
@@ -181,7 +187,7 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
         value={endereco}
         rules={[
           {
-            required: true,
+            required: isRequired,
             message: "Insira o endereço do paciente!",
           },
         ]}
@@ -189,7 +195,7 @@ export default function PacientCreateOrEdit({ request ,url, notification }) {
         <Input onChange={(e) => setEndereco(e.target.value)} />
       </Form.Item>
       <Form.Item>
-        <Button ghost="true" htmlType="submit" onClick={handlePacient}>
+        <Button type="primary" htmlType="submit" onClick={handlePacient}>
           Send
         </Button>
       </Form.Item>
