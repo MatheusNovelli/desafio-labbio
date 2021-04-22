@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import PacientCreate from './pages/PacientCreate';
+import PacientEdit from './pages/PacientEdit';
 import PacientList from './pages/PacientList';
 
 export default function Routes(){
@@ -9,6 +10,7 @@ export default function Routes(){
             <Switch>
                 <Route path="/" exact component={PacientList}/>
                 <Route path="/newpacient" exact component={PacientCreate}/>
+                <Route path="/pacientedit/:id" exact component={PacientEdit}/>
             </Switch>
         </BrowserRouter>
     )

@@ -19,7 +19,14 @@ export default function PacientList() {
           {pacients.map((pacient, index) => (
             <div className="pacient-item">
               <span key= {index}>{pacient.nome}</span>
-              <button>Editar</button>
+              <Link to={{
+                pathname: `pacientedit/${pacient.id}`,
+                state: pacients
+              }
+              }>
+              <button onClick={console.log("id",pacient.id)}>Editar</button>
+              </Link>
+              
             </div>
           ))}
         </div>

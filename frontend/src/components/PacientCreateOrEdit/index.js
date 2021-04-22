@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Form, Input, Button, notification } from "antd";
+import { Form, Input, Button } from "antd";
 import { FiCheckCircle } from "react-icons/fi";
-import api from "../../services/api";
 
 const layout = {
   labelCol: {
@@ -12,7 +11,7 @@ const layout = {
   },
 };
 
-export default function PacientCreate() {
+export default function PacientCreateOrEdit({ request ,url, notification }) {
   const [id, setId] = useState(0);
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
@@ -35,14 +34,13 @@ export default function PacientCreate() {
     endereco,
   };
 
-  function createPacient(e) {
+  function handlePacient(e) {
     e.preventDefault();
 
     try {
-      api.post("pacientes", data);
+      request(url, data);
       notification.open({
-        message: "Sucesso!",
-        description: "Paciente criado.",
+        message: notification,
         className: "ant-notification",
         top: "100px",
         icon: <FiCheckCircle style={{ color: "#2ECEF1" }} />,
@@ -64,7 +62,6 @@ export default function PacientCreate() {
       console.error("Erro ao criar paciente");
     }
   }
-
   return (
     <Form
       {...layout}
@@ -192,7 +189,7 @@ export default function PacientCreate() {
         <Input onChange={(e) => setEndereco(e.target.value)} />
       </Form.Item>
       <Form.Item>
-        <Button ghost="true" htmlType="submit" onClick={createPacient}>
+        <Button ghost="true" htmlType="submit" onClick={handlePacient}>
           Send
         </Button>
       </Form.Item>
