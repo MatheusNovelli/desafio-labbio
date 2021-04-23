@@ -1,6 +1,8 @@
+import { Button } from "antd";
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import api from "../../services/api";
+import "./styles.css";
 
 export default function PacientList() {
   const [pacients, setPacients] = useState([]);
@@ -13,30 +15,36 @@ export default function PacientList() {
 
   return (
     <div className="pacient-container">
-      <h3>Listagem dos pacientes</h3>
+      <h2>Listagem dos pacientes</h2>
       <div className="pacient-content">
         <div className="pacient-list">
-          {pacients.map((pacient, index) => (
+          {pacients.map((pacient) => (
             <div className="pacient-item">
-              <Link to={{
-                pathname: `pacientdetails/${pacient.id}`,
-                state: pacient
-              }}>
-              <span key= {index}>{pacient.nome}</span>
+              <Link
+                className="link-text"
+                to={{
+                  pathname: `pacientdetails/${pacient.id}`,
+                  state: pacient,
+                }}
+              >
+                <span >{pacient.nome}</span>
               </Link>
-              <Link to={{
-                pathname: `pacientedit/${pacient.id}`,
-                state: pacient
-              }
-              }>
-              <button onClick={console.log("id",pacient.id)}>Editar</button>
+              <Link
+                className="link-text"
+                to={{
+                  pathname: `pacientedit/${pacient.id}`,
+                  state: pacient,
+                }}
+              >
+                <Button type="primary">Editar</Button>
               </Link>
-              
             </div>
           ))}
         </div>
-        <div className="create-button">
-          <Link to="/newpacient"><div>Novo paciente</div></Link>
+        <div >
+          <Link to="/newpacient" className="link-text">
+            <Button type="primary">Novo paciente</Button>
+          </Link>
         </div>
       </div>
     </div>

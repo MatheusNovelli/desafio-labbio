@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Form, Input, Button } from "antd";
 import { FiCheckCircle } from "react-icons/fi";
 import api from "../../services/api";
-import 'antd/dist/antd.css'
+import "./styles.css";
+import "antd/dist/antd.css";
 
 const layout = {
   labelCol: {
@@ -13,7 +14,12 @@ const layout = {
   },
 };
 
-export default function PacientCreateOrEdit({ request, url, notification, isRequired }) {
+export default function PacientCreateOrEdit({
+  request,
+  url,
+  notification,
+  isRequired,
+}) {
   const [id, setId] = useState(0);
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
@@ -25,18 +31,21 @@ export default function PacientCreateOrEdit({ request, url, notification, isRequ
   const [endereco, setEndereco] = useState("");
 
   useEffect(() => {
-    api.get("pacientes").then((response) => {
-      setId(response.data);
-      setNome(response.data);
-      setCpf(response.data);
-      setSexo(response.data);
-      setIdade(response.data);
-      setPeso(response.data);
-      setTelefone(response.data);
-      setEmail(response.data);
-      setEndereco(response.data);
+    api.get(url).then((response) => {
+      console.log("teste1", response.data);
+      setId(response.data[0].id);
+      setNome(response.data[0].nome);
+      setCpf(response.data[0].cpf);
+      setSexo(response.data[0].sexo);
+      setIdade(response.data[0].idade);
+      setPeso(response.data[0].peso);
+      setTelefone(response.data[0].telefone);
+      setEmail(response.data[0].email);
+      setEndereco(response.data[0].endereco);
     });
   }, []);
+
+  console.log(id)
 
   const data = {
     id,
@@ -69,136 +78,136 @@ export default function PacientCreateOrEdit({ request, url, notification, isRequ
     }
   }
   return (
-    <Form
-      {...layout}
-      name="basic"
-      initialValues={{
-        remember: true,
-      }}
-    >
-      <Form.Item
-        label="ID"
-        name="id"
-        value={id}
-        rules={[
-          {
-            required: isRequired,
-            message: "Insira o ID do paciente!",
-          },
-        ]}
+    <div className="create-edit-container">
+      <Form
+        {...layout}
+        name="basic"
+        initialValues={{
+          remember: true,
+        }}
       >
-        <Input onChange={(e) => setId(e.target.value)} />
-      </Form.Item>
-      <Form.Item
-        label="Nome"
-        name="nome"
-        value={nome}
-        rules={[
-          {
-            required: isRequired,
-            message: "Insira o nome do paciente!",
-          },
-        ]}
-      >
-        <Input onChange={(e) => setNome(e.target.value)} />
-      </Form.Item>
-      <Form.Item
-        label="CPF"
-        name="cpf"
-        value={cpf}
-        rules={[
-          {
-            required: isRequired,
-            message: "Insira o CPF do paciente!",
-          },
-        ]}
-      >
-        <Input onChange={(e) => setCpf(e.target.value)} />
-      </Form.Item>
-      <Form.Item
-        label="Sexo"
-        name="sexo"
-        value={sexo}
-        rules={[
-          {
-            required: isRequired,
-            message: "Insira o sexo do paciente!",
-          },
-        ]}
-      >
-        <Input onChange={(e) => setSexo(e.target.value)} />
-      </Form.Item>
-      <Form.Item
-        label="Idade"
-        name="idade"
-        value={idade}
-        rules={[
-          {
-            required: isRequired,
-            message: "Insira a idade do paciente!",
-          },
-        ]}
-      >
-        <Input onChange={(e) => setIdade(e.target.value)} />
-      </Form.Item>
-      <Form.Item
-        label="Peso"
-        name="peso"
-        value={peso}
-        rules={[
-          {
-            required: isRequired,
-            message: "Insira o peso do paciente!",
-          },
-        ]}
-      >
-        <Input onChange={(e) => setPeso(e.target.value)} />
-      </Form.Item>
-      <Form.Item
-        label="Telefone"
-        name="telefone"
-        value={telefone}
-        rules={[
-          {
-            required: isRequired,
-            message: "Insira o telefone do paciente!",
-          },
-        ]}
-      >
-        <Input onChange={(e) => setTelefone(e.target.value)} />
-      </Form.Item>
-      <Form.Item
-        label="E-mail"
-        name="email"
-        value={email}
-        rules={[
-          {
-            required: isRequired,
-            message: "Insira o e-mail do paciente!",
-          },
-        ]}
-      >
-        <Input onChange={(e) => setEmail(e.target.value)} />
-      </Form.Item>
+        <Form.Item
+          label="ID"
+          name="id"
+          rules={[
+            {
+              required: isRequired,
+              message: "Insira o ID do paciente!",
+            },
+          ]}
+        >
+          <Input value={id} onChange={(e) => setId(e.target.value)} />
+        </Form.Item>
+        <Form.Item
+          label="Nome"
+          name="nome"
+          rules={[
+            {
+              required: isRequired,
+              message: "Insira o nome do paciente!",
+            },
+          ]}
+        >
+          <Input value={nome} onChange={(e) => setNome(e.target.value)} />
+        </Form.Item>
+        <Form.Item
+          label="CPF"
+          name="cpf"
+          rules={[
+            {
+              required: isRequired,
+              message: "Insira o CPF do paciente!",
+            },
+          ]}
+        >
+          <Input value={cpf} onChange={(e) => setCpf(e.target.value)} />
+        </Form.Item>
+        <Form.Item
+          label="Sexo"
+          name="sexo"
+          rules={[
+            {
+              required: isRequired,
+              message: "Insira o sexo do paciente!",
+            },
+          ]}
+        >
+          <Input value={sexo} onChange={(e) => setSexo(e.target.value)} />
+        </Form.Item>
+        <Form.Item
+          label="Idade"
+          name="idade"
+          rules={[
+            {
+              required: isRequired,
+              message: "Insira a idade do paciente!",
+            },
+          ]}
+        >
+          <Input value={idade} onChange={(e) => setIdade(e.target.value)} />
+        </Form.Item>
+        <Form.Item
+          label="Peso"
+          name="peso"
+          value={peso}
+          rules={[
+            {
+              required: isRequired,
+              message: "Insira o peso do paciente!",
+            },
+          ]}
+        >
+          <Input onChange={(e) => setPeso(e.target.value)} />
+        </Form.Item>
+        <Form.Item
+          label="Telefone"
+          name="telefone"
+          rules={[
+            {
+              required: isRequired,
+              message: "Insira o telefone do paciente!",
+            },
+          ]}
+        >
+          <Input
+            value={telefone}
+            onChange={(e) => setTelefone(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item
+          label="E-mail"
+          name="email"
+          rules={[
+            {
+              required: isRequired,
+              message: "Insira o e-mail do paciente!",
+            },
+          ]}
+        >
+          <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+        </Form.Item>
 
-      <Form.Item
-        label="Endereço"
-        name="endereco"
-        value={endereco}
-        rules={[
-          {
-            required: isRequired,
-            message: "Insira o endereço do paciente!",
-          },
-        ]}
-      >
-        <Input onChange={(e) => setEndereco(e.target.value)} />
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit" onClick={handlePacient}>
-          Send
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item
+          label="Endereço"
+          name="endereco"
+          rules={[
+            {
+              required: isRequired,
+              message: "Insira o endereço do paciente!",
+            },
+          ]}
+        >
+          <Input
+            value={endereco}
+            onChange={(e) => setEndereco(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit" onClick={handlePacient}>
+            Enviar
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 }

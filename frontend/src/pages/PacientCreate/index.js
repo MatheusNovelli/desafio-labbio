@@ -76,7 +76,6 @@ export default function PacientCreate() {
       <Form.Item
         label="ID"
         name="id"
-        value={id}
         rules={[
           {
             required: true,
@@ -84,12 +83,11 @@ export default function PacientCreate() {
           },
         ]}
       >
-        <Input onChange={(e) => setId(e.target.value)} />
+        <Input value={id} onChange={(e) => setId(e.target.value)} />
       </Form.Item>
       <Form.Item
         label="Nome"
         name="nome"
-        value={nome}
         rules={[
           {
             required: true,
@@ -97,7 +95,7 @@ export default function PacientCreate() {
           },
         ]}
       >
-        <Input onChange={(e) => setNome(e.target.value)} />
+        <Input value={nome} onChange={(e) => setNome(e.target.value)} />
       </Form.Item>
       <Form.Item
         label="CPF"
@@ -115,7 +113,6 @@ export default function PacientCreate() {
       <Form.Item
         label="Sexo"
         name="sexo"
-        value={sexo}
         rules={[
           {
             required: true,
@@ -123,12 +120,11 @@ export default function PacientCreate() {
           },
         ]}
       >
-        <Input onChange={(e) => setSexo(e.target.value)} />
+        <Input value={sexo} onChange={(e) => setSexo(e.target.value)} />
       </Form.Item>
       <Form.Item
         label="Idade"
         name="idade"
-        value={idade}
         rules={[
           {
             required: true,
@@ -136,12 +132,11 @@ export default function PacientCreate() {
           },
         ]}
       >
-        <Input onChange={(e) => setIdade(e.target.value)} />
+        <Input value={idade} onChange={(e) => setIdade(e.target.value)} />
       </Form.Item>
       <Form.Item
         label="Peso"
         name="peso"
-        value={peso}
         rules={[
           {
             required: true,
@@ -149,12 +144,11 @@ export default function PacientCreate() {
           },
         ]}
       >
-        <Input onChange={(e) => setPeso(e.target.value)} />
+        <Input value={peso} onChange={(e) => setPeso(e.target.value)} />
       </Form.Item>
       <Form.Item
         label="Telefone"
         name="telefone"
-        value={telefone}
         rules={[
           {
             required: true,
@@ -162,12 +156,11 @@ export default function PacientCreate() {
           },
         ]}
       >
-        <Input onChange={(e) => setTelefone(e.target.value)} />
+        <Input value={telefone} onChange={(e) => setTelefone(e.target.value)} />
       </Form.Item>
       <Form.Item
         label="E-mail"
         name="email"
-        value={email}
         rules={[
           {
             required: true,
@@ -175,13 +168,12 @@ export default function PacientCreate() {
           },
         ]}
       >
-        <Input onChange={(e) => setEmail(e.target.value)} />
+        <Input value={email} onChange={(e) => setEmail(e.target.value)} />
       </Form.Item>
 
       <Form.Item
         label="Endereço"
         name="endereco"
-        value={endereco}
         rules={[
           {
             required: true,
@@ -189,10 +181,10 @@ export default function PacientCreate() {
           },
         ]}
       >
-        <Input onChange={(e) => setEndereco(e.target.value)} />
+        <Input value={endereco} onChange={(e) => setEndereco(e.target.value)} />
       </Form.Item>
       <Form.Item>
-        <Button ghost="true" htmlType="submit" onClick={createPacient}>
+        <Button type="primary" htmlType="submit" onClick={createPacient}>
           Send
         </Button>
       </Form.Item>
