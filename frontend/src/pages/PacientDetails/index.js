@@ -3,24 +3,24 @@ import api from "../../services/api";
 
 export default function PacientDetails(props) {
   function PacientInfo({ info, infoRes }) {
-      return (
-        <div>
-          <strong>
-            {info}
-            <p>{infoRes}</p>
-            {console.log("teste",infoRes)}
-          </strong>
-        </div>
-      );
+    return (
+      <div>
+        <strong>
+          {info}
+          <p>{infoRes}</p>
+        </strong>
+      </div>
+    );
   }
 
   const [pacient, setPacient] = useState();
+  const url =`pacientes/${props.match.params.id}`;
 
   useEffect(() => {
-    api.get(`pacientes/${props.match.params.id}`).then((response) => {
+    api.get(url).then((response) => {
       setPacient(response.data);
     });
-  }, []);
+  }, [url]);
 
   return (
     <div>
@@ -32,9 +32,13 @@ export default function PacientDetails(props) {
         {pacient && <PacientInfo info={"Sexo"} infoRes={pacient[0].sexo} />}
         {pacient && <PacientInfo info={"Idade"} infoRes={pacient[0].idade} />}
         {pacient && <PacientInfo info={"Peso"} infoRes={pacient[0].peso} />}
-        {pacient && <PacientInfo info={"Telefone"} infoRes={pacient[0].telefone} />}
+        {pacient && (
+          <PacientInfo info={"Telefone"} infoRes={pacient[0].telefone} />
+        )}
         {pacient && <PacientInfo info={"E-mail"} infoRes={pacient[0].email} />}
-        {pacient && <PacientInfo info={"Endereço"} infoRes={pacient[0].endereco} />}
+        {pacient && (
+          <PacientInfo info={"Endereço"} infoRes={pacient[0].endereco} />
+        )}
       </div>
     </div>
   );

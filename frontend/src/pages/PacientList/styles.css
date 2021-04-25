@@ -8,3 +8,54 @@
   text-decoration: inherit;
 }
 
+.list-button {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.list-button:hover {
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.08);
+}
+
+.pacient-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
+
+.pacient-content {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5%;
+  width: 100%;
+  align-items: center;
+}
+
+.pacient-list {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  align-items: center;
+}
+
+.pacient-item {
+  display: flex;
+  width: 50%;
+  margin-bottom: 2%;
+  padding: 1%;
+  border-bottom: 1px solid #707070;
+}
+
+.pacient-name{
+  font-size: 2vh;
+}
+
+.buttons-list{
+  display: flex;
+  width: 10%;
+  margin-left: auto;
+}

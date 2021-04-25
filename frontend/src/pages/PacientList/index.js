@@ -13,35 +13,45 @@ export default function PacientList() {
     });
   }, []);
 
+  function organizeAlphabetically(a, b) {
+    return a.nome.localeCompare(b.nome)
+  }
+
   return (
     <div className="pacient-container">
       <h2>Listagem dos pacientes</h2>
       <div className="pacient-content">
         <div className="pacient-list">
-          {pacients.map((pacient) => (
+          {pacients.sort(organizeAlphabetically).map((pacient) => (
             <div className="pacient-item">
-              <Link
-                className="link-text"
-                to={{
-                  pathname: `pacientdetails/${pacient.id}`,
-                  state: pacient,
-                }}
-              >
-                <span >{pacient.nome}</span>
-              </Link>
-              <Link
-                className="link-text"
-                to={{
-                  pathname: `pacientedit/${pacient.id}`,
-                  state: pacient,
-                }}
-              >
-                <Button type="primary">Editar</Button>
-              </Link>
+              <div className="pacient-name">
+                <Link
+                  className="link-text"
+                  to={{
+                    pathname: `pacientdetails/${pacient.id}`,
+                    state: pacient,
+                  }}
+                >
+                  <span>{pacient.nome}</span>
+                </Link>
+              </div>
+              <div className="buttons-list">
+                <Link
+                  className="link-text"
+                  to={{
+                    pathname: `pacientedit/${pacient.id}`,
+                    state: pacient,
+                  }}
+                >
+                  <Button ghost="true" type="primary">
+                    Editar
+                  </Button>
+                </Link>
+              </div>
             </div>
           ))}
         </div>
-        <div >
+        <div className="list-button">
           <Link to="/newpacient" className="link-text">
             <Button type="primary">Novo paciente</Button>
           </Link>
